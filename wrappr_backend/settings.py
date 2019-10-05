@@ -40,6 +40,9 @@ class Common(Configuration):
         'django_extensions',
         'debug_toolbar',
 
+        'django_celery_results',
+        "django_celery_beat",
+
         'wrappr_backend.users',
         'wrappr_backend.detection',
     ]
@@ -121,6 +124,8 @@ class Common(Configuration):
     UPLOADED_FILES_USE_URL = True
 
     AUTH_USER_MODEL = 'users.User'
+
+    CELERY_RESULT_BACKEND = 'django-db'
 
     REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': [
