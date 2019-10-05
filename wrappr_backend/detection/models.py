@@ -45,7 +45,7 @@ class Object(UUIDMixin):
     y1 = models.IntegerField()
     x2 = models.IntegerField()
     y2 = models.IntegerField()
-    title = models.CharField(max_length=255, blank=True)
-    category = models.CharField(max_length=255, blank=True)
+    label = models.CharField(max_length=255, blank=True)
+    confidence = models.CharField(max_length=255, blank=True)
 
     def get_user(self): return self.result.get_user()
