@@ -35,6 +35,7 @@ class Common(Configuration):
         'django.contrib.staticfiles',
 
         "rest_framework",
+        "drf_firebase_auth",
 
         'django_extensions',
         'debug_toolbar',
@@ -115,6 +116,10 @@ class Common(Configuration):
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+    MEDIA_ROOT = values.PathValue("media")
+    MEDIA_URL = "/media/"
+    UPLOADED_FILES_USE_URL = True
+
     AUTH_USER_MODEL = 'users.User'
 
     REST_FRAMEWORK = {
@@ -125,7 +130,7 @@ class Common(Configuration):
     }
 
     DRF_FIREBASE_AUTH = {
-        'FIREBASE_SERVICE_ACCOUNT_KEY': values.PathValue("firebase.json"),
+        'FIREBASE_SERVICE_ACCOUNT_KEY': os.path.join(BASE_DIR, 'firebase.json'),
         'FIREBASE_CREATE_LOCAL_USER': True,
         'FIREBASE_ATTEMPT_CREATE_WITH_DISPLAY_NAME': True,
         'FIREBASE_AUTH_HEADER_PREFIX': 'JWT',

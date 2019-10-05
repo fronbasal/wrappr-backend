@@ -5,15 +5,17 @@ from wrappr_backend.detection.mixins import TimestampMixin, UUIDMixin
 
 
 def frame_path(instance, filename):
-    return f"{instance.context.uuid}/{instance.uuid}.{filename.split('.')[-1]}"
+    return f"{instance.context.id}/{instance.id}.{filename.split('.')[-1]}"
 
 
 def result_path(instance, filename):
-    return f"{instance.frame.context.uuid}/{instance.uuid}.{filename.split('.')[-1]}"
+    return f"{instance.frame.context.id}/{instance.id}.{filename.split('.')[-1]}"
 
 
 class Context(TimestampMixin, UUIDMixin):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+
+    def __str__(self): return f"{self.user} at {self.timestamp}"
 
 
 class Frame(TimestampMixin, UUIDMixin):
@@ -22,11 +24,19 @@ class Frame(TimestampMixin, UUIDMixin):
     width = models.IntegerField()
     image = models.ImageField(height_field="height", width_field="width", upload_to=frame_path)
 
+    def get_image(self): return self.image.url
+
+    def get_user(self): return self.context.user
+
 
 class Result(TimestampMixin, UUIDMixin):
     frame = models.ForeignKey(Frame, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=result_path)
     score = models.IntegerField()
+
+    def get_image(self): return self.image.url
+
+    def get_user(self): return self.frame.get_user()
 
 
 class Object(UUIDMixin):
@@ -37,3 +47,5 @@ class Object(UUIDMixin):
     y2 = models.IntegerField()
     title = models.CharField(max_length=255, blank=True)
     category = models.CharField(max_length=255, blank=True)
+
+    def get_user(self): return self.result.get_user()

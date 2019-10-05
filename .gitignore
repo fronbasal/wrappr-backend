@@ -3,4 +3,6 @@ db.sqlite3
 __pycache__/
 .env
 celerybeat-schedule
-assets
+assets/
+firebase.json
+media/
