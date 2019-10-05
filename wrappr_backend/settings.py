@@ -34,6 +34,8 @@ class Common(Configuration):
         'whitenoise.runserver_nostatic',
         'django.contrib.staticfiles',
 
+        "rest_framework",
+
         'django_extensions',
         'debug_toolbar',
 
