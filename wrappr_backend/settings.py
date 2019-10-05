@@ -40,6 +40,7 @@ class Common(Configuration):
         'debug_toolbar',
 
         'wrappr_backend.users',
+        'wrappr_backend.detection',
     ]
 
     MIDDLEWARE = [
@@ -115,6 +116,22 @@ class Common(Configuration):
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
     AUTH_USER_MODEL = 'users.User'
+
+    REST_FRAMEWORK = {
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+            'rest_framework.authentication.SessionAuthentication',
+            'drf_firebase_auth.authentication.FirebaseAuthentication',
+        ]
+    }
+
+    DRF_FIREBASE_AUTH = {
+        'FIREBASE_SERVICE_ACCOUNT_KEY': values.PathValue("firebase.json"),
+        'FIREBASE_CREATE_LOCAL_USER': True,
+        'FIREBASE_ATTEMPT_CREATE_WITH_DISPLAY_NAME': True,
+        'FIREBASE_AUTH_HEADER_PREFIX': 'JWT',
+        'FIREBASE_CHECK_JWT_REVOKED': True,
+        'FIREBASE_AUTH_EMAIL_VERIFICATION': False
+    }
 
 
 class Development(Common):
