@@ -21,7 +21,7 @@ class FrameSerializer(serializers.HyperlinkedModelSerializer):
 class ResultSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Result
-        fields = ("id", "image", "score", "frame")
+        fields = ("id", "image", "score", "frame",)
 
 
 class ObjectSerializer(serializers.HyperlinkedModelSerializer):

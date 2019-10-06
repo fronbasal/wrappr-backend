@@ -32,7 +32,6 @@ class Frame(TimestampMixin, UUIDMixin):
 class Result(TimestampMixin, UUIDMixin):
     frame = models.ForeignKey(Frame, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=result_path)
-    score = models.IntegerField()
 
     def get_image(self): return self.image.url
 
@@ -47,5 +46,6 @@ class Object(UUIDMixin):
     y2 = models.IntegerField()
     label = models.CharField(max_length=255, blank=True)
     confidence = models.CharField(max_length=255, blank=True)
+    score = models.PositiveIntegerField()
 
     def get_user(self): return self.result.get_user()
