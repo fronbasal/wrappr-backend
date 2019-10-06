@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from django.urls import include
 from rest_framework import serializers, viewsets
+from rest_framework.response import Response
 from rest_framework.routers import DefaultRouter
 
 from wrappr_backend.detection.models import Context, Frame, Result, Object
@@ -21,13 +22,13 @@ class FrameSerializer(serializers.HyperlinkedModelSerializer):
 class ResultSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Result
-        fields = ("id", "image", "score", "frame",)
+        fields = ("id", "image", "frame",)
 
 
 class ObjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Object
-        exclude = ()
+        fields = ("result", "x1", "x2", "y1", "y2", "label")
 
 
 class ContextViewSet(viewsets.ModelViewSet):
@@ -55,8 +56,7 @@ class ResultViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ObjectViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ObjectSerializer
-
-    def get_queryset(self): Object.objects.filter(result__frame__context__user=self.request.user)
+    queryset = Object.objects.all()
 
 
 router = DefaultRouter()

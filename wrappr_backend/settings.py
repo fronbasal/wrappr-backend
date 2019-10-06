@@ -22,7 +22,7 @@ class Common(Configuration):
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = values.BooleanValue(False)
 
-    ALLOWED_HOSTS = values.ListValue([])
+    ALLOWED_HOSTS = values.ListValue(['*'])
 
     # Application definition
     INSTALLED_APPS = [
@@ -51,6 +51,7 @@ class Common(Configuration):
         'django.middleware.security.SecurityMiddleware',
         'whitenoise.middleware.WhiteNoiseMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
+        'corsheaders.middleware.CorsMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -131,11 +132,8 @@ class Common(Configuration):
         'DEFAULT_AUTHENTICATION_CLASSES': [
             'rest_framework.authentication.SessionAuthentication',
             'drf_firebase_auth.authentication.FirebaseAuthentication',
-        ]
+        ],
     }
-
-    DETECTION_MODEL = values.PathValue(os.path.join(BASE_DIR, 'wrappr_backend/detection/data/face.xml'))
-    EMOTION_MODEL = values.PathValue(os.path.join(BASE_DIR, 'wrappr_backend/detection/data/fer2013.hdf5'))
 
     DRF_FIREBASE_AUTH = {
         'FIREBASE_SERVICE_ACCOUNT_KEY': os.path.join(BASE_DIR, 'firebase.json'),
@@ -146,14 +144,14 @@ class Common(Configuration):
         'FIREBASE_AUTH_EMAIL_VERIFICATION': False
     }
 
+    CORS_ORIGIN_ALLOW_ALL = values.BooleanValue(True)
+
 
 class Development(Common):
     """
     The in-development settings and the default configuration.
     """
     DEBUG = True
-
-    ALLOWED_HOSTS = []
 
     INTERNAL_IPS = [
         '127.0.0.1'

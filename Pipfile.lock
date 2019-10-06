@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a0363e44f84e9bf5dcdc1d75f95c83b20071a12314347bcdc505463ea4ae40c6"
+            "sha256": "6f654c16b6179359b23d48aed2c3db5ced07cdf3865367204da6be188f896b82"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -103,6 +103,14 @@
             "index": "pypi",
             "version": "==2.1"
         },
+        "django-cors-headers": {
+            "hashes": [
+                "sha256:5762ec9c2d59f38c76828dc1d4308baca4bc0d3e1d6f217683e7a24a1c4611a3",
+                "sha256:ee02f4b699e9b6645602a46d0adb430ee940a1bf8df64f77e516f8d7711fee60"
+            ],
+            "index": "pypi",
+            "version": "==3.1.1"
+        },
         "django-debug-toolbar": {
             "hashes": [
                 "sha256:17c53cd6bf4e7d69902aedf9a1d26c5d3b7369b54c5718744704f27b5a72f35d",
@@ -133,6 +141,14 @@
             ],
             "index": "pypi",
             "version": "==3.10.3"
+        },
+        "drf-aggregates": {
+            "hashes": [
+                "sha256:1a3be72caaee7b38764a69e982926d3fede3ec217c0500909e1d42c70b347672",
+                "sha256:c8a3da60bf4c7c390dfafddc770272ad28d3f9f9019d2cc35e23939af930f63c"
+            ],
+            "index": "pypi",
+            "version": "==0.0.12"
         },
         "drf-firebase-auth": {
             "hashes": [
