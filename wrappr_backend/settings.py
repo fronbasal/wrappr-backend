@@ -134,6 +134,9 @@ class Common(Configuration):
         ]
     }
 
+    DETECTION_MODEL = values.PathValue(os.path.join(BASE_DIR, 'wrappr_backend/detection/data/face.xml'))
+    EMOTION_MODEL = values.PathValue(os.path.join(BASE_DIR, 'wrappr_backend/detection/data/fer2013.hdf5'))
+
     DRF_FIREBASE_AUTH = {
         'FIREBASE_SERVICE_ACCOUNT_KEY': os.path.join(BASE_DIR, 'firebase.json'),
         'FIREBASE_CREATE_LOCAL_USER': True,
