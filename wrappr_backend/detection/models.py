@@ -20,9 +20,7 @@ class Context(TimestampMixin, UUIDMixin):
 
 class Frame(TimestampMixin, UUIDMixin):
     context = models.ForeignKey(Context, models.CASCADE)
-    height = models.IntegerField()
-    width = models.IntegerField()
-    image = models.ImageField(height_field="height", width_field="width", upload_to=frame_path)
+    image = models.ImageField(upload_to=frame_path)
 
     def get_image(self): return self.image.url
 
@@ -31,7 +29,7 @@ class Frame(TimestampMixin, UUIDMixin):
 
 class Result(TimestampMixin, UUIDMixin):
     frame = models.ForeignKey(Frame, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=result_path)
+    image = models.ImageField(upload_to=result_path, null=True)
 
     def get_image(self): return self.image.url
 
@@ -46,6 +44,6 @@ class Object(UUIDMixin):
     y2 = models.IntegerField()
     label = models.CharField(max_length=255, blank=True)
     confidence = models.CharField(max_length=255, blank=True)
-    score = models.PositiveIntegerField()
+    score = models.PositiveIntegerField(blank=True)
 
     def get_user(self): return self.result.get_user()
